@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>المستوى الأول: الأساسيات والبيانات</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#0b3d6e;
+  --primary-2:#145a9e;
+  --accent:#e0a526;
+  --bg:#f3f6fa;
+  --card:#ffffff;
+  --text:#1f2a37;
+  --muted:#5b6778;
+  --border:#dbe3ee;
+  --row:#f7f9fc;
+  --head:#e8eff8;
+  --ok:#1f8a4c;
+  --warn:#c77c00;
+  --bad:#c0392b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Kufi Arabic",Tahoma,sans-serif;
+  direction:rtl;text-align:right;
+  background:var(--bg);color:var(--text);
+  line-height:1.9;font-size:15px;
+}
+/* Header */
+header{
+  background:linear-gradient(135deg,var(--primary),var(--primary-2));
+  color:#fff;padding:40px 20px 34px;text-align:center;
+  border-bottom:5px solid var(--accent);
+}
+header .tag{
+  display:inline-block;background:rgba(255,255,255,.15);
+  padding:4px 16px;border-radius:20px;font-size:13px;margin-bottom:12px;
+}
+header h1{font-size:30px;font-weight:800;line-height:1.5}
+header p{opacity:.9;margin-top:8px;font-size:15px}
+.stats{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:22px;
+}
+.stat{
+  background:#fff;color:var(--primary);border-radius:12px;
+  padding:10px 18px;min-width:110px;box-shadow:0 4px 12px rgba(0,0,0,.12);
+}
+.stat b{display:block;font-size:22px;font-weight:800;line-height:1.4}
+.stat span{font-size:12px;color:var(--muted)}
+/* Layout */
+.wrap{max-width:1200px;margin:0 auto;padding:24px 16px;display:grid;grid-template-columns:250px 1fr;gap:24px}
+nav.toc{
+  position:sticky;top:16px;align-self:start;
+  background:var(--card);border-radius:14px;padding:18px;
+  border:1px solid var(--border);box-shadow:0 2px 8px rgba(11,61,110,.05);
+}
+nav.toc h3{font-size:15px;color:var(--primary);margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid var(--accent)}
+nav.toc a{
+  display:block;color:var(--text);text-decoration:none;font-size:14px;
+  padding:7px 10px;border-radius:8px;border-right:3px solid transparent;
+}
+nav.toc a:hover,nav.toc a.active{background:var(--head);border-right-color:var(--primary);color:var(--primary)}
+main{min-width:0}
+section.card{
+  background:var(--card);border-radius:16px;padding:26px 28px;margin-bottom:24px;
+  border:1px solid var(--border);box-shadow:0 2px 10px rgba(11,61,110,.05);
+}
+h2{
+  font-size:22px;color:var(--primary);font-weight:800;margin-bottom:14px;
+  display:flex;align-items:center;gap:10px;
+}
+h2 .num{
+  background:var(--primary);color:#fff;width:36px;height:36px;border-radius:10px;
+  display:inline-flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;
+}
+h3{font-size:17px;color:var(--primary-2);margin:22px 0 10px;font-weight:700}
+p{margin-bottom:10px}
+.lead{font-size:16px;font-weight:500}
+ul,ol{padding-right:22px;margin-bottom:12px}
+li{margin-bottom:6px}
+strong{color:var(--primary)}
+/* Tables */
+.tbl{overflow-x:auto;margin:12px 0 16px;border-radius:12px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}
+th{background:var(--primary);color:#fff;font-weight:600;padding:11px 12px;text-align:right;white-space:nowrap}
+td{padding:10px 12px;border-top:1px solid var(--border);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--row)}
+td.c,th.c{text-align:center}
+tr.total td{background:var(--head)!important;font-weight:700;color:var(--primary)}
+tr.group td.g{font-weight:700;color:var(--primary);background:#eef4fb}
+.badge{
+  display:inline-block;background:var(--accent);color:#3a2a00;font-size:12px;
+  font-weight:700;padding:2px 10px;border-radius:12px;margin-inline-start:6px;white-space:nowrap;
+}
+.wk{font-weight:800;color:var(--primary);text-align:center}
+.d{color:var(--muted);font-size:12px;display:block}
+/* Boxes */
+.box{border-radius:12px;padding:14px 18px;margin:14px 0;border-right:5px solid}
+.box.info{background:#eaf2fb;border-color:var(--primary-2)}
+.box.note{background:#fff7e6;border-color:var(--accent)}
+.box.ok{background:#e9f7ef;border-color:var(--ok)}
+.box b.t{display:block;margin-bottom:4px;color:var(--primary)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:12px 0}
+.mini{background:var(--row);border:1px solid var(--border);border-radius:12px;padding:14px}
+.mini .big{font-size:24px;font-weight:800;color:var(--primary)}
+.cond{counter-reset:c;list-style:none;padding:0}
+.cond li{
+  counter-increment:c;position:relative;padding:12px 56px 12px 14px;margin-bottom:10px;
+  background:var(--row);border:1px solid var(--border);border-radius:12px;
+}
+.cond li::before{
+  content:counter(c);position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  width:32px;height:32px;border-radius:50%;background:var(--ok);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:700;
+}
+.timeline{position:relative;padding-right:28px;margin-top:10px}
+.timeline::before{content:"";position:absolute;right:9px;top:6px;bottom:6px;width:3px;background:var(--border)}
+.tl{position:relative;margin-bottom:16px}
+.tl::before{
+  content:"";position:absolute;right:-25px;top:8px;width:14px;height:14px;border-radius:50%;
+  background:var(--accent);border:3px solid #fff;box-shadow:0 0 0 2px var(--accent);
+}
+.tl b{color:var(--primary)}
+.res-ok{color:var(--ok);font-weight:700}
+.res-warn{color:var(--warn);font-weight:700}
+.res-bad{color:var(--bad);font-weight:700}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:20px 16px 36px}
+.top{
+  position:fixed;left:18px;bottom:18px;background:var(--primary);color:#fff;
+  width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  text-decoration:none;font-size:20px;box-shadow:0 4px 12px rgba(0,0,0,.2);
+}
+@media (max-width:900px){
+  .wrap{grid-template-columns:1fr}
+  nav.toc{position:static}
+  section.card{padding:20px 16px}
+  header h1{font-size:23px}
+}
+@media print{
+  nav.toc,.top{display:none}
+  .wrap{display:block}
+  body{background:#fff}
+  section.card{box-shadow:none;break-inside:avoid-page}
+}
+</style>
+</head>
+<body>
+
+<header id="top">
+  <div class="tag">برنامج AI Engineer</div>
+  <h1>المستوى الأول: الأساسيات والبيانات</h1>
+  <p>نظام يومين تدريب في الأسبوع · التقييم وآلية الانتقال للمستوى الثاني</p>
+  <div class="stats">
+    <div class="stat"><b>42</b><span>يوم تدريبي</span></div>
+    <div class="stat"><b>126</b><span>ساعة</span></div>
+    <div class="stat"><b>21</b><span>أسبوع</span></div>
+    <div class="stat"><b>≈ 4.8</b><span>شهر</span></div>
+    <div class="stat"><b>2</b><span>يوم / أسبوع</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="toc">
+    <h3>المحتويات</h3>
+    <a href="#overview">1. نظرة عامة</a>
+    <a href="#content">2. محتوى المستوى</a>
+    <a href="#schedule">3. الجدول الأسبوعي</a>
+    <a href="#assessment">4. نظام التقييم</a>
+    <a href="#progress">5. آلية الانتقال للمستوى 2</a>
+  </nav>
+
+  <main>
+    <!-- 1 -->
+    <section class="card" id="overview">
+      <h2><span class="num">1</span>نظرة عامة</h2>
+      <p class="lead">المستوى الأول بنظام يومين في الأسبوع = <strong>42 يوم تدريبي · 126 ساعة · 21 أسبوع ≈ 4.8 شهر</strong>، بنفس المحتوى والترتيب اللي في الخطة الأصلية.</p>
+      <div class="box info"><b class="t">الهدف</b>الطالب يكتب بايثون ويجيب البيانات من أي مصدر ويحللها ويعرضها.</div>
+      <div class="tbl"><table>
+        <thead><tr><th>البند</th><th>القيمة</th></tr></thead>
+        <tbody>
+          <tr><td>أيام التدريب</td><td>يومين في الأسبوع (مثلًا: السبت والثلاثاء، عشان يبقى فيه 3 أيام بينهم للمذاكرة والواجب)</td></tr>
+          <tr><td>ساعات اليوم</td><td>3 ساعات: 30 دقيقة مراجعة وأسئلة، 90 دقيقة شرح، 60 دقيقة تطبيق عملي (Lab)</td></tr>
+          <tr><td>أيام المحتوى</td><td>41 يوم (123 ساعة) زي الخطة الأصلية</td></tr>
+          <tr><td>يوم إضافي</td><td>يوم 42 لمناقشة المشاريع وإعلان النتائج (3 ساعات)</td></tr>
+          <tr><td>المدة</td><td>21 أسبوع ≈ 4.8 شهر (بدل 14 أسبوع بنظام 3 أيام)</td></tr>
+        </tbody>
+      </table></div>
+      <h3>شكل اليوم التدريبي (3 ساعات)</h3>
+      <div class="grid2">
+        <div class="mini"><div class="big">30 د</div>مراجعة اليوم اللي فات وحل أسئلة الطلاب</div>
+        <div class="mini"><div class="big">90 د</div>شرح المحتوى المقرر لليوم</div>
+        <div class="mini"><div class="big">60 د</div>تطبيق عملي (Lab) وواجب صغير</div>
+      </div>
+      <div class="box note"><b class="t">الفرق عن الخطة الأصلية</b>زودنا يوم مناقشة في الآخر، ونقطة تقييم في نص المستوى (تكليف التعامل مع البيانات)، لأن المسافة بين اختبار بايثون (أسبوع 5) وتسليم المشروع (أسبوع 21) بقت طويلة بنظام اليومين.</div>
+    </section>
+
+    <!-- 2 -->
+    <section class="card" id="content">
+      <h2><span class="num">2</span>محتوى المستوى</h2>
+      <p>ثلاث مسارات + مشروع، بنفس ساعات الخطة الأصلية.</p>
+      <div class="tbl"><table>
+        <thead><tr><th>المسار</th><th>الموضوع</th><th class="c">الساعات</th><th class="c">الأيام</th></tr></thead>
+        <tbody>
+          <tr class="group"><td class="g" rowspan="7">أساسيات بايثون</td><td>مدخل</td><td class="c">1.5</td><td class="c">0.5</td></tr>
+          <tr><td>أساسيات لغة بايثون</td><td class="c">12</td><td class="c">4</td></tr>
+          <tr><td>الوحدات Modules والحزم Packages</td><td class="c">3</td><td class="c">1</td></tr>
+          <tr><td>التعابير النمطية Regular Expressions</td><td class="c">3</td><td class="c">1</td></tr>
+          <tr><td>التعامل مع الملفات النصية</td><td class="c">3</td><td class="c">1</td></tr>
+          <tr><td>استخراج البيانات من الويب Web scraping</td><td class="c">6</td><td class="c">2</td></tr>
+          <tr class="total"><td>إجمالي المسار</td><td class="c">28.5</td><td class="c">9.5</td></tr>
+
+          <tr class="group"><td class="g" rowspan="8">التعامل مع البيانات</td><td>مدخل</td><td class="c">1.5</td><td class="c">0.5</td></tr>
+          <tr><td>قواعد البيانات Databases</td><td class="c">4.5</td><td class="c">1.5</td></tr>
+          <tr><td>لغة الاستعلام SQL</td><td class="c">7.5</td><td class="c">2.5</td></tr>
+          <tr><td>قواعد بيانات NoSQL</td><td class="c">6</td><td class="c">2</td></tr>
+          <tr><td>الواجهات البرمجية APIs</td><td class="c">6</td><td class="c">2</td></tr>
+          <tr><td>استخراج البيانات من الويب</td><td class="c">4.5</td><td class="c">1.5</td></tr>
+          <tr><td>التعامل مع ملفات Excel و CSV</td><td class="c">4.5</td><td class="c">1.5</td></tr>
+          <tr class="total"><td>إجمالي المسار</td><td class="c">34.5</td><td class="c">11.5</td></tr>
+
+          <tr class="group"><td class="g" rowspan="13">تحليل البيانات Data Analysis</td><td>مدخل</td><td class="c">3</td><td class="c">1</td></tr>
+          <tr><td>التعامل مع البيانات والإحصاء</td><td class="c">13.5</td><td class="c">4.5</td></tr>
+          <tr><td>تمثيل البيانات مرئيًا عبر Pandas</td><td class="c">3</td><td class="c">1</td></tr>
+          <tr><td>تحليل البيانات مرئيًا عبر Matplotlib</td><td class="c">4.5</td><td class="c">1.5</td></tr>
+          <tr><td>تمثيل البيانات مرئيًا عبر Seaborn</td><td class="c">6</td><td class="c">2</td></tr>
+          <tr><td>تحليل أداء الطلاب في إحدى المدارس</td><td class="c">3</td><td class="c">1</td></tr>
+          <tr><td>تحليل بيانات متجر إلكتروني لتحسين استراتيجية المبيعات</td><td class="c">3</td><td class="c">1</td></tr>
+          <tr><td>تحليل سلوك العملاء</td><td class="c">3</td><td class="c">1</td></tr>
+          <tr><td>تحليل بيانات الحملات التسويقية</td><td class="c">3</td><td class="c">1</td></tr>
+          <tr><td>تحليل بيانات حملة تسويقية لبنك للتنبؤ باشتراك العملاء</td><td class="c">3</td><td class="c">1</td></tr>
+          <tr><td>تحليل مبيعات السيارات</td><td class="c">4.5</td><td class="c">1.5</td></tr>
+          <tr><td>الخاتمة</td><td class="c">1.5</td><td class="c">0.5</td></tr>
+          <tr class="total"><td>إجمالي المسار</td><td class="c">51</td><td class="c">17</td></tr>
+
+          <tr class="group"><td class="g">مشروع المستوى</td><td>جمع بيانات (Scraping أو API أو SQL) + تنظيف + تحليل + Dashboard</td><td class="c">9</td><td class="c">3</td></tr>
+          <tr class="group"><td class="g">مناقشة ونتائج</td><td>مناقشة المشاريع وإعلان النتائج</td><td class="c">3</td><td class="c">1</td></tr>
+          <tr class="total"><td>إجمالي المستوى الأول</td><td></td><td class="c">126</td><td class="c">42</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <!-- 3 -->
+    <section class="card" id="schedule">
+      <h2><span class="num">3</span>الجدول الأسبوعي</h2>
+      <p>21 أسبوع × يومين. (2/5) معناها اليوم التاني من 5 أيام للموضوع ده، واليوم اللي فيه موضوعين يتقسم نص بنص. مواعيد التقييم متعلّمة بـ <span class="badge">تقييم</span>.</p>
+      <div class="tbl"><table>
+        <thead><tr><th class="c">الأسبوع</th><th>اليوم الأول</th><th>اليوم الثاني</th></tr></thead>
+        <tbody>
+          <tr><td class="wk">1</td><td><span class="d">يوم 1</span>بايثون: مدخل + أساسيات لغة بايثون (1/5)</td><td><span class="d">يوم 2</span>أساسيات لغة بايثون (2/5)</td></tr>
+          <tr><td class="wk">2</td><td><span class="d">يوم 3</span>أساسيات لغة بايثون (3/5)</td><td><span class="d">يوم 4</span>أساسيات لغة بايثون (4/5)</td></tr>
+          <tr><td class="wk">3</td><td><span class="d">يوم 5</span>أساسيات لغة بايثون (5/5) + Modules والحزم (1/2)</td><td><span class="d">يوم 6</span>Modules والحزم (2/2) + Regular Expressions (1/2)</td></tr>
+          <tr><td class="wk">4</td><td><span class="d">يوم 7</span>Regular Expressions (2/2) + الملفات النصية (1/2)</td><td><span class="d">يوم 8</span>الملفات النصية (2/2) + Web scraping (1/3)</td></tr>
+          <tr><td class="wk">5</td><td><span class="d">يوم 9</span>Web scraping (2/3)</td><td><span class="d">يوم 10</span>Web scraping (3/3) + التعامل مع البيانات: مدخل <span class="badge">اختبار بايثون (آخر ساعة)</span></td></tr>
+          <tr><td class="wk">6</td><td><span class="d">يوم 11</span>قواعد البيانات (1/2)</td><td><span class="d">يوم 12</span>قواعد البيانات (2/2) + SQL (1/3)</td></tr>
+          <tr><td class="wk">7</td><td><span class="d">يوم 13</span>SQL (2/3)</td><td><span class="d">يوم 14</span>SQL (3/3)</td></tr>
+          <tr><td class="wk">8</td><td><span class="d">يوم 15</span>NoSQL (1/2)</td><td><span class="d">يوم 16</span>NoSQL (2/2)</td></tr>
+          <tr><td class="wk">9</td><td><span class="d">يوم 17</span>APIs (1/2)</td><td><span class="d">يوم 18</span>APIs (2/2)</td></tr>
+          <tr><td class="wk">10</td><td><span class="d">يوم 19</span>استخراج البيانات من الويب (1/2)</td><td><span class="d">يوم 20</span>استخراج البيانات من الويب (2/2) + Excel و CSV (1/2)</td></tr>
+          <tr><td class="wk">11</td><td><span class="d">يوم 21</span>Excel و CSV (2/2) <span class="badge">استلام تكليف البيانات</span></td><td><span class="d">يوم 22</span>تحليل البيانات: مدخل</td></tr>
+          <tr><td class="wk">12</td><td><span class="d">يوم 23</span>البيانات والإحصاء (1/5) <span class="badge">تسليم التكليف</span></td><td><span class="d">يوم 24</span>البيانات والإحصاء (2/5)</td></tr>
+          <tr><td class="wk">13</td><td><span class="d">يوم 25</span>البيانات والإحصاء (3/5)</td><td><span class="d">يوم 26</span>البيانات والإحصاء (4/5)</td></tr>
+          <tr><td class="wk">14</td><td><span class="d">يوم 27</span>البيانات والإحصاء (5/5) + Pandas (1/2)</td><td><span class="d">يوم 28</span>Pandas (2/2) + Matplotlib (1/2)</td></tr>
+          <tr><td class="wk">15</td><td><span class="d">يوم 29</span>Matplotlib (2/2)</td><td><span class="d">يوم 30</span>Seaborn (1/2)</td></tr>
+          <tr><td class="wk">16</td><td><span class="d">يوم 31</span>Seaborn (2/2)</td><td><span class="d">يوم 32</span>تحليل أداء الطلاب</td></tr>
+          <tr><td class="wk">17</td><td><span class="d">يوم 33</span>تحليل مبيعات متجر إلكتروني</td><td><span class="d">يوم 34</span>تحليل سلوك العملاء</td></tr>
+          <tr><td class="wk">18</td><td><span class="d">يوم 35</span>تحليل الحملات التسويقية</td><td><span class="d">يوم 36</span>تحليل حملة بنك</td></tr>
+          <tr><td class="wk">19</td><td><span class="d">يوم 37</span>تحليل مبيعات السيارات (1/2)</td><td><span class="d">يوم 38</span>مبيعات السيارات (2/2) + الخاتمة <span class="badge">تسليم مقترح المشروع</span></td></tr>
+          <tr><td class="wk">20</td><td><span class="d">يوم 39</span>مشروع المستوى (1/3)</td><td><span class="d">يوم 40</span>مشروع المستوى (2/3) <span class="badge">مراجعة منتصف المشروع</span></td></tr>
+          <tr><td class="wk">21</td><td><span class="d">يوم 41</span>مشروع المستوى (3/3) <span class="badge">تسليم المشروع</span></td><td><span class="d">يوم 42</span><span class="badge">مناقشة المشاريع وإعلان النتائج</span></td></tr>
+        </tbody>
+      </table></div>
+      <div class="box info">المستوى الثاني يبدأ أسبوع 22. أسبوعا 22 و23 هما فترة التعويض والإعادة للي محتاجها (التفاصيل في آلية الانتقال).</div>
+    </section>
+
+    <!-- 4 -->
+    <section class="card" id="assessment">
+      <h2><span class="num">4</span>نظام التقييم</h2>
+      <p class="lead">الطالب يتقيّم من <strong>100 درجة</strong> على 5 مكونات، والمشروع لوحده 40% لأنه شرط النجاح الأساسي.</p>
+      <div class="tbl"><table>
+        <thead><tr><th>المكوّن</th><th class="c">الدرجة</th><th>الموعد</th><th>الحد الأدنى</th></tr></thead>
+        <tbody>
+          <tr><td>الحضور والمشاركة</td><td class="c">10</td><td>طول المستوى</td><td>حضور 75% من الأيام (32 يوم من 42)</td></tr>
+          <tr><td>واجبات الـ Lab اليومية</td><td class="c">15</td><td>كل يوم تدريبي</td><td>—</td></tr>
+          <tr><td>اختبار بايثون</td><td class="c">20</td><td>يوم 10 (أسبوع 5)</td><td>10 من 20</td></tr>
+          <tr><td>تكليف التعامل مع البيانات</td><td class="c">15</td><td>استلام يوم 21، تسليم يوم 23</td><td>—</td></tr>
+          <tr><td>مشروع المستوى + المناقشة</td><td class="c">40</td><td>تسليم يوم 41، مناقشة يوم 42</td><td>20 من 40</td></tr>
+          <tr class="total"><td>الإجمالي</td><td class="c">100</td><td></td><td>60 من 100</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>4.1 الحضور والمشاركة (10 درجات)</h3>
+      <ul>
+        <li>5 درجات حضور: بتتحسب بنسبة الأيام اللي حضرها من 42 يوم.</li>
+        <li>5 درجات مشاركة: حل أسئلة المراجعة في أول 30 دقيقة، والسؤال والنقاش في الشرح.</li>
+        <li>التأخير أكتر من 30 دقيقة يتحسب نص يوم غياب.</li>
+      </ul>
+
+      <h3>4.2 واجبات الـ Lab اليومية (15 درجة)</h3>
+      <ul>
+        <li>كل يوم له تمرين صغير في آخر ساعة، والطالب يكمله في البيت ويسلمه قبل اليوم التدريبي اللي بعده.</li>
+        <li>كل واجب يتقيّم: كامل = 2، ناقص = 1، مش متسلم = صفر. الدرجة النهائية = متوسط الواجبات محوّل لـ 15.</li>
+        <li>أيام الحالات العملية (أداء الطلاب، المتجر، سلوك العملاء، الحملات التسويقية، البنك، السيارات): الواجب هو تحليل نفس الـ dataset بسؤال جديد غير اللي اتشرح.</li>
+      </ul>
+
+      <h3>4.3 اختبار بايثون (20 درجة)</h3>
+      <p>آخر ساعة في يوم 10 (مكان وقت الـ Lab)، بعد ما المسار الأول يخلص. اختبار عملي على الجهاز، 60 دقيقة، 5 مهام كود.</p>
+      <div class="tbl"><table>
+        <thead><tr><th class="c">المهمة</th><th>المحتوى</th><th class="c">الدرجة</th></tr></thead>
+        <tbody>
+          <tr><td class="c">1</td><td>المتغيرات والشروط والحلقات</td><td class="c">4</td></tr>
+          <tr><td class="c">2</td><td>الدوال وهياكل البيانات (List و Dictionary)</td><td class="c">4</td></tr>
+          <tr><td class="c">3</td><td>استخدام Module أو Package</td><td class="c">3</td></tr>
+          <tr><td class="c">4</td><td>Regular Expressions + قراءة وكتابة ملف نصي</td><td class="c">5</td></tr>
+          <tr><td class="c">5</td><td>استخراج بيانات بسيطة من صفحة ويب</td><td class="c">4</td></tr>
+          <tr class="total"><td></td><td>الإجمالي</td><td class="c">20</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box note">النجاح: 10 من 20. اللي يجيب أقل بياخد إنذار مكتوب وفرصة إعادة (شوف آلية الانتقال).</div>
+
+      <h3>4.4 تكليف التعامل مع البيانات (15 درجة)</h3>
+      <p>الاستلام يوم 21 والتسليم يوم 23 (أسبوع كامل). المطلوب: الطالب يجيب بيانات من قاعدة بيانات بـ SQL ومن API عامة، يدمجهم، ويحفظ النتيجة في ملف Excel أو CSV.</p>
+      <div class="tbl"><table>
+        <thead><tr><th>المعيار</th><th class="c">الدرجة</th></tr></thead>
+        <tbody>
+          <tr><td>استعلامات SQL صحيحة</td><td class="c">5</td></tr>
+          <tr><td>استدعاء الـ API وقراءة الـ JSON</td><td class="c">5</td></tr>
+          <tr><td>الدمج والحفظ في Excel أو CSV</td><td class="c">3</td></tr>
+          <tr><td>تنظيم الكود والتعليقات</td><td class="c">2</td></tr>
+          <tr class="total"><td>الإجمالي</td><td class="c">15</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>4.5 مشروع المستوى (40 درجة)</h3>
+      <div class="timeline">
+        <div class="tl"><b>يوم 38:</b> الطالب يسلم مقترح صفحة واحدة: مصدر البيانات، 3 أسئلة عاوز يجاوبها، والرسوم اللي ناوي يعملها. المدرب يوافق أو يعدّل قبل يوم 39.</div>
+        <div class="tl"><b>يوم 40:</b> مراجعة منتصف المشروع، المدرب يشوف الشغل ويدي ملاحظات (من غير درجة).</div>
+        <div class="tl"><b>يوم 41:</b> تسليم الـ Notebook + الـ Dashboard + ملف README.</div>
+        <div class="tl"><b>يوم 42:</b> مناقشة 10 دقائق لكل طالب: يعرض 5 دقائق ويجاوب أسئلة 5 دقائق.</div>
+      </div>
+      <div class="tbl"><table>
+        <thead><tr><th>المعيار</th><th class="c">الدرجة</th></tr></thead>
+        <tbody>
+          <tr><td>جمع البيانات من مصدر حقيقي (Scraping أو API أو SQL)</td><td class="c">8</td></tr>
+          <tr><td>تنظيف وتجهيز البيانات بـ Pandas</td><td class="c">8</td></tr>
+          <tr><td>التحليل والإحصاء: إجابة الأسئلة بأرقام واضحة</td><td class="c">8</td></tr>
+          <tr><td>الـ Dashboard والرسوم (Matplotlib أو Seaborn)</td><td class="c">8</td></tr>
+          <tr><td>جودة الكود والتوثيق (README، Notebook منظم)</td><td class="c">4</td></tr>
+          <tr><td>المناقشة الشفوية</td><td class="c">4</td></tr>
+          <tr class="total"><td>الإجمالي</td><td class="c">40</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box note">النجاح: 20 من 40. لو الطالب مقدرش يشرح الكود بتاعه في المناقشة، المشروع ميتحسبش ويدخل مسار إعادة التسليم.</div>
+    </section>
+
+    <!-- 5 -->
+    <section class="card" id="progress">
+      <h2><span class="num">5</span>آلية الانتقال للمستوى الثاني</h2>
+      <p class="lead">الطالب ينتقل للمستوى الثاني مباشرة في أسبوع 22 لو حقق <strong>الأربع شروط مع بعض</strong>؛ لو فاته شرط واحد بياخد فرصة تعويض واحدة خلال أسبوعين، ولو فشل فيها يعيد المستوى.</p>
+
+      <h3>5.1 شروط الانتقال المباشر</h3>
+      <ol class="cond">
+        <li>المجموع الكلي 60 من 100 أو أكتر.</li>
+        <li>درجة المشروع 20 من 40 أو أكتر، وشرح الكود بتاعه في المناقشة.</li>
+        <li>اختبار بايثون 10 من 20 أو أكتر (أو النجاح في الإعادة).</li>
+        <li>حضور 75% على الأقل (32 يوم من 42).</li>
+      </ol>
+
+      <h3>5.2 التقديرات</h3>
+      <div class="tbl"><table>
+        <thead><tr><th class="c">المجموع</th><th>التقدير</th><th>القرار</th></tr></thead>
+        <tbody>
+          <tr><td class="c">85 – 100</td><td>ممتاز</td><td class="res-ok">ينتقل للمستوى الثاني</td></tr>
+          <tr><td class="c">75 – 84</td><td>جيد جدًا</td><td class="res-ok">ينتقل للمستوى الثاني</td></tr>
+          <tr><td class="c">65 – 74</td><td>جيد</td><td class="res-ok">ينتقل للمستوى الثاني</td></tr>
+          <tr><td class="c">60 – 64</td><td>مقبول</td><td class="res-ok">ينتقل للمستوى الثاني</td></tr>
+          <tr><td class="c">50 – 59</td><td>لم يجتز بعد</td><td class="res-warn">تكليف تعويضي</td></tr>
+          <tr><td class="c">أقل من 50</td><td>غير مجتاز</td><td class="res-bad">يعيد المستوى الأول</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>5.3 حالات التعثر والتعويض</h3>
+      <div class="tbl"><table>
+        <thead><tr><th>الحالة</th><th>الإجراء</th><th>الموعد</th><th>أقصى درجة بعد التعويض</th></tr></thead>
+        <tbody>
+          <tr><td>اختبار بايثون أقل من 10</td><td>إعادة الاختبار مرة واحدة بنفس الشكل، في جلسة خارج الجدول أو أونلاين</td><td>خلال أسبوعين من يوم 10 (قبل يوم 14)</td><td class="c">10 من 20</td></tr>
+          <tr><td>المشروع أقل من 20، أو مقدرش يشرحه</td><td>إعادة تسليم المشروع بعد ملاحظات المدرب + مناقشة تانية</td><td>خلال 14 يوم من يوم 42 (آخر أسبوع 23)</td><td class="c">20 من 40</td></tr>
+          <tr><td>المجموع 50 – 59 والمشروع ناجح</td><td>تكليف تعويضي: تحليل dataset جديدة (تنظيف + 3 أسئلة + رسمتين)</td><td>خلال 14 يوم من يوم 42</td><td class="c">المجموع يوصل 60</td></tr>
+          <tr><td>الحضور بين 60% و 75%</td><td>تعويض واجبات الـ Lab للأيام الفايتة قبل المناقشة</td><td>قبل يوم 42</td><td class="c">—</td></tr>
+          <tr><td>الحضور أقل من 60% (أقل من 26 يوم)</td><td class="res-bad">يعيد المستوى الأول</td><td>—</td><td class="c">—</td></tr>
+          <tr><td>فشل في أي تعويض</td><td class="res-bad">يعيد المستوى الأول مع الدفعة الجاية</td><td>—</td><td class="c">—</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="box ok"><b class="t">الانتقال المشروط</b>الطالب اللي في فترة تعويض المشروع أو التكليف التعويضي يحضر أول أسبوعين من المستوى الثاني (مدخل ML، Numpy، Scikit-learn) بشكل مشروط. لو نجح في التعويض يكمل عادي، ولو فشل يوقف ويعيد المستوى الأول.</div>
+      <div class="box info"><b class="t">الإعادة</b>الطالب اللي بيعيد المستوى ميبدأش من الأول لو نجح في جزء منه. لو نجح في اختبار بايثون يبدأ من مسار "التعامل مع البيانات" (أسبوع 6 من الدفعة الجاية).</div>
+
+      <h3>5.4 خطوات القرار</h3>
+      <div class="timeline">
+        <div class="tl"><b>يوم 10 (أسبوع 5):</b> نتيجة اختبار بايثون. اللي أقل من 10 بياخد إنذار مكتوب وميعاد الإعادة.</div>
+        <div class="tl"><b>يوم 23 (أسبوع 12):</b> تقرير متابعة لكل طالب: الحضور + الواجبات + اختبار بايثون + التكليف. اللي مجموعه لحد دلوقتي أقل من 50% من الدرجات المتاحة بياخد تنبيه وخطة دعم (مراجعة إضافية أو تمارين زيادة).</div>
+        <div class="tl"><b>يوم 38 (أسبوع 19):</b> آخر موعد لتعويض واجبات الحضور، وتسليم مقترح المشروع.</div>
+        <div class="tl"><b>يوم 42 (أسبوع 21):</b> المناقشة، وحساب المجموع، وإعلان النتيجة لكل طالب: ينتقل / تعويض / يعيد.</div>
+        <div class="tl"><b>آخر أسبوع 23:</b> آخر موعد لكل حالات التعويض، والقرار النهائي لكل الطلاب.</div>
+      </div>
+
+      <h3>5.5 إفادة المستوى</h3>
+      <p>الطالب اللي ينتقل بياخد إفادة اجتياز المستوى الأول بالتقدير، وفيها درجة المشروع واسمه.</p>
+    </section>
+  </main>
+</div>
+
+<footer>برنامج AI Engineer · المستوى الأول: الأساسيات والبيانات</footer>
+<a class="top" href="#top" aria-label="لأعلى">↑</a>
+
+<script>
+const links=[...document.querySelectorAll('nav.toc a')];
+const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+addEventListener('scroll',()=>{
+  let i=0;secs.forEach((s,k)=>{if(s.getBoundingClientRect().top<120)i=k});
+  links.forEach((a,k)=>a.classList.toggle('active',k===i));
+});
+</script>
+</body>
+</html>
